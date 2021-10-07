@@ -231,7 +231,7 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
   @override
   void didChangeDependencies() {
     final size = MediaQuery.of(context).size;
-    _screenSize = Size(min(size.width, 400), min(size.height, 400)); // ;
+    _screenSize = Size(min(size.width, 500), min(size.height, 500)); // ;
 
     try {
       _bloc = Bloc.of(context);
