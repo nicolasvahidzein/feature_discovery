@@ -600,9 +600,9 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 		
     if (isBackgroundCentered) {
 			
-      //return anchor;
+      return anchor;
 			
-			return const Offset(0, 0);//NICOLAS ZEIN TESTING
+			//return const Offset(0, 0);//NICOLAS ZEIN TESTING
 			
     } else {
 			
@@ -619,33 +619,33 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
           final adjustedPercent = const Interval(0.0, 0.8, curve: Curves.easeOut).transform(_transitionProgress!);
 					
-          //return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
+          return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
 					
-					return const Offset(10, 10);//NICOLAS ZEIN TESTING
+					//return const Offset(10, 10);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.completing:
 					
-          //return endingBackgroundPosition;
+          return endingBackgroundPosition;
 					
-					return const Offset(20, 20);//NICOLAS ZEIN TESTING
+					//return const Offset(20, 20);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.dismissing:
 					
-          //return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
+          return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
 					
-					return const Offset(30, 30);//NICOLAS ZEIN TESTING
+					//return const Offset(30, 30);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.opened:
 					
-          //return endingBackgroundPosition;
+          return endingBackgroundPosition;
 					
-					return const Offset(40, 40);//NICOLAS ZEIN TESTING
+					//return const Offset(40, 40);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.closed:
 					
-          //return startingBackgroundPosition;
+          return startingBackgroundPosition;
 					
-					return const Offset(50, 50);//NICOLAS ZEIN TESTING
+					//return const Offset(50, 50);//NICOLAS ZEIN TESTING
 					
         case null:
 					
@@ -681,8 +681,7 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
     final dx = contentCenterPosition.dx - contentWidth;
     final contentPosition = Offset(
       (dx.isNegative) ? 0.0 : dx,
-      anchor.dy +
-          contentOffsetMultiplier * (44 + 20), // 44 is the tap target's radius.
+      anchor.dy + contentOffsetMultiplier * (44 + 20), // 44 is the tap target's radius.
     );
 
     Widget background = Container(
