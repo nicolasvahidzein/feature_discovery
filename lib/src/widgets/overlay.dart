@@ -502,7 +502,7 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 			
       //return anchor;
 			
-			return const Offset(200, 200);//NICOLAS ZEIN TESTING
+			return Offset(anchor.dx + 200, anchor.dy);//NICOLAS ZEIN TESTING
 			
     } else {
       final startingBackgroundPosition = anchor;
@@ -522,8 +522,14 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
         case ContentLocation.below:
 					
-          endingBackgroundPosition = Offset(
+          /*endingBackgroundPosition = Offset(
 						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
+						anchor.dy + (width / 2.0) - 80.0
+					);*/
+					
+					//NICOLAS ZEIN TESTING
+          endingBackgroundPosition = Offset(
+						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 + 200 : 20.0),
 						anchor.dy + (width / 2.0) - 80.0
 					);
 					
@@ -541,33 +547,33 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
           final adjustedPercent = const Interval(0.0, 0.8, curve: Curves.easeOut).transform(_transitionProgress!);
 					
-          //return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
+          return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
 					
-					return const Offset(500, 500);//NICOLAS ZEIN TESTING
+					//return const Offset(500, 500);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.completing:
 					
-          //return endingBackgroundPosition;
+          return endingBackgroundPosition;
 					
-					return const Offset(520, 520);//NICOLAS ZEIN TESTING
+					//return const Offset(520, 520);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.dismissing:
 					
-          //return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
+          return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
 					
-					return const Offset(540, 540);//NICOLAS ZEIN TESTING
+					//return const Offset(540, 540);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.opened:
 					
-          //return endingBackgroundPosition;
+          return endingBackgroundPosition;
 					
-					return const Offset(560, 560);//NICOLAS ZEIN TESTING
+					//return const Offset(560, 560);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.closed:
 					
-          //return startingBackgroundPosition;
+          return startingBackgroundPosition;
 					
-					return const Offset(580, 580);//NICOLAS ZEIN TESTING
+					//return const Offset(580, 580);//NICOLAS ZEIN TESTING
 					
         case null:
 					
