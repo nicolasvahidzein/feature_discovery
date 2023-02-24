@@ -438,49 +438,6 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  //THIS IS WHERE IT GETS INTERESTING
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   bool _isCloseToTopOrBottom(Offset position) => position.dy <= 88.0 || (_screenSize.height - position.dy) <= 88.0;
 
   bool _isOnTopHalfOfScreen(Offset position) => position.dy < (_screenSize.height / 2.0);
@@ -524,12 +481,13 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
         case ContentLocation.below:
 					
+					//OLD CODE
           /*endingBackgroundPosition = Offset(
 						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
 						anchor.dy + (width / 2.0) - 80.0
 					);*/
 					
-					//NICOLAS ZEIN TESTING
+					//NICOLAS ZEIN CHANGE
           endingBackgroundPosition = Offset(
 						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0) + (widget.offsetBackgroundOverride == null ? 0 : widget.offsetBackgroundOverride!.dx),
 						anchor.dy + (width / 2.0) - 80.0 + (widget.offsetBackgroundOverride == null ? 0 : widget.offsetBackgroundOverride!.dy),
@@ -551,31 +509,21 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
           return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
 					
-					//return const Offset(500, 500);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.completing:
 					
           return endingBackgroundPosition;
-					
-					//return const Offset(520, 520);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.dismissing:
 					
           return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
 					
-					//return const Offset(540, 540);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.opened:
 					
           return endingBackgroundPosition;
 					
-					//return const Offset(560, 560);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.closed:
 					
           return startingBackgroundPosition;
-					
-					//return const Offset(580, 580);//NICOLAS ZEIN TESTING
 					
         case null:
 					
@@ -610,8 +558,6 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 			
       return anchor;
 			
-			//return const Offset(0, 0);//NICOLAS ZEIN TESTING
-			
     } else {
 			
       final startingBackgroundPosition = anchor;
@@ -629,31 +575,21 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
           return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
 					
-					//return const Offset(10, 10);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.completing:
 					
           return endingBackgroundPosition;
-					
-					//return const Offset(20, 20);//NICOLAS ZEIN TESTING
 					
         case FeatureOverlayState.dismissing:
 					
           return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
 					
-					//return const Offset(30, 30);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.opened:
 					
           return endingBackgroundPosition;
 					
-					//return const Offset(40, 40);//NICOLAS ZEIN TESTING
-					
         case FeatureOverlayState.closed:
 					
           return startingBackgroundPosition;
-					
-					//return const Offset(50, 50);//NICOLAS ZEIN TESTING
 					
         case null:
 					
@@ -697,46 +633,6 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
       height: double.infinity,
       color: Colors.transparent,
     );
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//IT STOPS BEING INTERESTING
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
     /// Will try to dismiss this overlay,
     /// then will call the bloc's dismiss function
