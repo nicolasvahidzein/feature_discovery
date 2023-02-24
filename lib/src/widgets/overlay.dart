@@ -477,26 +477,20 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 
 
 
-  bool _isCloseToTopOrBottom(Offset position) =>
-      position.dy <= 88.0 || (_screenSize.height - position.dy) <= 88.0;
+  bool _isCloseToTopOrBottom(Offset position) => position.dy <= 88.0 || (_screenSize.height - position.dy) <= 88.0;
 
-  bool _isOnTopHalfOfScreen(Offset position) =>
-      position.dy < (_screenSize.height / 2.0);
+  bool _isOnTopHalfOfScreen(Offset position) => position.dy < (_screenSize.height / 2.0);
 
-  bool _isOnLeftHalfOfScreen(Offset position) =>
-      position.dx < (_screenSize.width / 2.0);
+  bool _isOnLeftHalfOfScreen(Offset position) => position.dx < (_screenSize.width / 2.0);
 
-  /// The value returned from here will be adjusted in [BackgroundContentLayoutDelegate]
+	/// The value returned from here will be adjusted in [BackgroundContentLayoutDelegate]
   /// in order to match the transition progress and overlay state.
   double _backgroundRadius(Offset anchor) {
     final isBackgroundCentered = _isCloseToTopOrBottom(anchor);
-    final backgroundRadius = min(_screenSize.width, _screenSize.height) *
-        (isBackgroundCentered ? 1.0 : 0.7);
+    final backgroundRadius = min(_screenSize.width, _screenSize.height) * (isBackgroundCentered ? 1.0 : 0.7);
     
-		//return backgroundRadius;
-		
-		//NICOLAS ZEIN testing to see if it has an effect
-		return 100.0;
+		return backgroundRadius;
+		//return 100.0;//NICOLAS ZEIN testing
 		
   }
 
@@ -505,48 +499,80 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
     final isBackgroundCentered = _isCloseToTopOrBottom(anchor);
 
     if (isBackgroundCentered) {
-      return anchor;
+			
+      //return anchor;
+			
+			return const Offset(200, 200);//NICOLAS ZEIN TESTING
+			
     } else {
       final startingBackgroundPosition = anchor;
-
+			
       Offset? endingBackgroundPosition;
+			
       switch (contentLocation) {
+				
         case ContentLocation.above:
+					
           endingBackgroundPosition = Offset(
-              anchor.dx -
-                  width / 2.0 +
-                  (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
-              anchor.dy - (width / 2.0) + 80.0);
+						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
+						anchor.dy - (width / 2.0) + 80.0
+					);
+					
           break;
+					
         case ContentLocation.below:
+					
           endingBackgroundPosition = Offset(
-              anchor.dx -
-                  width / 2.0 +
-                  (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
-              anchor.dy + (width / 2.0) - 80.0);
+						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
+						anchor.dy + (width / 2.0) - 80.0
+					);
+					
           break;
+					
         case ContentLocation.trivial:
+					
           throw ArgumentError.value(contentLocation);
+					
       }
-
+			
       switch (_state) {
+				
         case FeatureOverlayState.opening:
-          final adjustedPercent =
-              const Interval(0.0, 0.8, curve: Curves.easeOut)
-                  .transform(_transitionProgress!);
-          return Offset.lerp(startingBackgroundPosition,
-              endingBackgroundPosition, adjustedPercent);
+					
+          final adjustedPercent = const Interval(0.0, 0.8, curve: Curves.easeOut).transform(_transitionProgress!);
+					
+          //return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
+					
+					return const Offset(500, 500);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.completing:
-          return endingBackgroundPosition;
+					
+          //return endingBackgroundPosition;
+					
+					return const Offset(520, 520);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.dismissing:
-          return Offset.lerp(endingBackgroundPosition,
-              startingBackgroundPosition, _transitionProgress!);
+					
+          //return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
+					
+					return const Offset(540, 540);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.opened:
-          return endingBackgroundPosition;
+					
+          //return endingBackgroundPosition;
+					
+					return const Offset(560, 560);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.closed:
-          return startingBackgroundPosition;
+					
+          //return startingBackgroundPosition;
+					
+					return const Offset(580, 580);//NICOLAS ZEIN TESTING
+					
         case null:
+					
           return throw ArgumentError.notNull();
+					
       }
     }
   }
@@ -571,37 +597,62 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
   Offset? _contentCenterPosition(Offset anchor) {
     final width = min(_screenSize.width, _screenSize.height);
     final isBackgroundCentered = _isCloseToTopOrBottom(anchor);
-
+		
     if (isBackgroundCentered) {
-      return anchor;
+			
+      //return anchor;
+			
+			return const Offset(0, 0);//NICOLAS ZEIN TESTING
+			
     } else {
+			
       final startingBackgroundPosition = anchor;
+			
       final endingBackgroundPosition = Offset(
           anchor.dx + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0),
-          anchor.dy +
-              (_isOnTopHalfOfScreen(anchor)
-                  ? -(width / 2) + 40.0
-                  : (width / 20.0) - 40.0));
-
+          anchor.dy + (_isOnTopHalfOfScreen(anchor) ? -(width / 2) + 40.0 : (width / 20.0) - 40.0)
+			);
+			
       switch (_state) {
+				
         case FeatureOverlayState.opening:
-          final adjustedPercent =
-              const Interval(0.0, 0.8, curve: Curves.easeOut)
-                  .transform(_transitionProgress!);
-          return Offset.lerp(startingBackgroundPosition,
-              endingBackgroundPosition, adjustedPercent);
+					
+          final adjustedPercent = const Interval(0.0, 0.8, curve: Curves.easeOut).transform(_transitionProgress!);
+					
+          //return Offset.lerp(startingBackgroundPosition, endingBackgroundPosition, adjustedPercent);
+					
+					return const Offset(10, 10);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.completing:
-          return endingBackgroundPosition;
+					
+          //return endingBackgroundPosition;
+					
+					return const Offset(20, 20);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.dismissing:
-          return Offset.lerp(endingBackgroundPosition,
-              startingBackgroundPosition, _transitionProgress!);
+					
+          //return Offset.lerp(endingBackgroundPosition, startingBackgroundPosition, _transitionProgress!);
+					
+					return const Offset(30, 30);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.opened:
-          return endingBackgroundPosition;
+					
+          //return endingBackgroundPosition;
+					
+					return const Offset(40, 40);//NICOLAS ZEIN TESTING
+					
         case FeatureOverlayState.closed:
-          return startingBackgroundPosition;
+					
+          //return startingBackgroundPosition;
+					
+					return const Offset(50, 50);//NICOLAS ZEIN TESTING
+					
         case null:
+					
           throw ArgumentError.notNull();
+					
       }
+			
     }
   }
 
