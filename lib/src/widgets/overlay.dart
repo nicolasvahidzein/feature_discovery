@@ -136,7 +136,10 @@ class DescribedFeatureOverlay extends StatefulWidget {
   /// If the function returns `false`, nothing happens. If it returns `true`,
   /// all of the current steps are dismissed.
   final Future<bool> Function()? onBackgroundTap;
-
+	
+	/// Offset we can add to custom override a feature discovery when the position of the background is totally off
+	final Offset? offsetBackgroundOverride;
+	
   const DescribedFeatureOverlay({
     Key? key,
     required this.featureId,
@@ -162,6 +165,7 @@ class DescribedFeatureOverlay extends StatefulWidget {
     this.barrierDismissible = true,
     this.backgroundDismissible = false,
     this.onBackgroundTap,
+		this.offsetBackgroundOverride,
   })  : assert(
           barrierDismissible == true || onDismiss == null,
           'Cannot provide both a barrierDismissible and onDismiss function\n'
@@ -500,9 +504,7 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 
     if (isBackgroundCentered) {
 			
-      //return anchor;
-			
-			return Offset(anchor.dx + 200, anchor.dy);//NICOLAS ZEIN TESTING
+      return anchor;
 			
     } else {
       final startingBackgroundPosition = anchor;
@@ -529,8 +531,8 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
 					
 					//NICOLAS ZEIN TESTING
           endingBackgroundPosition = Offset(
-						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 + 200 : 20.0),
-						anchor.dy + (width / 2.0) - 80.0
+						anchor.dx - width / 2.0 + (_isOnLeftHalfOfScreen(anchor) ? -20.0 : 20.0) + (widget.offsetBackgroundOverride == null ? 0 : widget.offsetBackgroundOverride!.dx),
+						anchor.dy + (width / 2.0) - 80.0 + (widget.offsetBackgroundOverride == null ? 0 : widget.offsetBackgroundOverride!.dy),
 					);
 					
           break;
