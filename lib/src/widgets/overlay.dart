@@ -434,6 +434,49 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
     });
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+  //THIS IS WHERE IT GETS INTERESTING
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   bool _isCloseToTopOrBottom(Offset position) =>
       position.dy <= 88.0 || (_screenSize.height - position.dy) <= 88.0;
 
@@ -449,7 +492,12 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
     final isBackgroundCentered = _isCloseToTopOrBottom(anchor);
     final backgroundRadius = min(_screenSize.width, _screenSize.height) *
         (isBackgroundCentered ? 1.0 : 0.7);
-    return backgroundRadius;
+    
+		//return backgroundRadius;
+		
+		//NICOLAS ZEIN testing to see if it has an effect
+		return 100.0;
+		
   }
 
   Offset? _backgroundPosition(Offset anchor, ContentLocation contentLocation) {
@@ -591,7 +639,47 @@ class _DescribedFeatureOverlayState extends State<DescribedFeatureOverlay>
       height: double.infinity,
       color: Colors.transparent,
     );
-
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//IT STOPS BEING INTERESTING
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
     /// Will try to dismiss this overlay,
     /// then will call the bloc's dismiss function
     /// only if this overlay has been successfully dismissed.
